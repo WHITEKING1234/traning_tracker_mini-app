@@ -199,9 +199,15 @@ export function createServer({
   });
 }
 
+export function getListenOptions(env = process.env) {
+  const port = Number(env.PORT ?? 3000);
+  const defaultHost = env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1";
+  const host = env.HOST ?? defaultHost;
+  return { port, host };
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const port = Number(process.env.PORT ?? 3000);
-  const host = process.env.HOST ?? "127.0.0.1";
+  const { port, host } = getListenOptions();
   const server = createServer();
   server.listen(port, host, () => {
     console.log(`Training app listening on http://${host}:${port}`);

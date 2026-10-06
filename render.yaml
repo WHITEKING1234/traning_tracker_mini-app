@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: training-tracker-mini-app
+    runtime: node
+    buildCommand: npm test
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_FILE
+        value: data/app-data.json
+      - key: BOT_TOKEN
+        sync: false

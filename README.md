@@ -25,7 +25,7 @@ npm test
 ## Environment
 
 - `PORT` — порт сервера, по умолчанию `3000`.
-- `HOST` — host для локального сервера, по умолчанию `127.0.0.1`.
+- `HOST` — host для сервера. По умолчанию `127.0.0.1` в development и `0.0.0.0` в production.
 - `DATA_FILE` — путь к JSON-базе, по умолчанию `data/app-data.json`.
 - `BOT_TOKEN` — токен Telegram-бота для проверки Mini App `initData`.
 
@@ -41,6 +41,20 @@ npm test
 6. Открой бота в Telegram на iPhone и нажми кнопку приложения.
 
 Telegram launch data валидируется на backend. Никогда не добавляй `BOT_TOKEN` в frontend-код.
+
+## Render Deploy
+
+В репозитории есть `render.yaml`, поэтому Render может поднять сервис как Blueprint.
+
+1. Открой Render Dashboard и выбери New → Blueprint.
+2. Подключи GitHub repo `WHITEKING1234/traning_tracker_mini-app`.
+3. Render прочитает `render.yaml`.
+4. В поле `BOT_TOKEN` вставь токен Telegram-бота из `@BotFather`.
+5. Запусти deploy.
+6. После успешного деплоя открой `https://...onrender.com/api/health`.
+7. Если ответ `{ "ok": true, "app": "training-os" }`, вставь основной HTTPS URL в BotFather как Mini App/Menu Button URL.
+
+`BOT_TOKEN` хранится как secret env var на Render и не коммитится в GitHub.
 
 ## iPhone Home Screen Icon
 
