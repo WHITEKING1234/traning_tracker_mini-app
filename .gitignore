@@ -1,0 +1,5 @@
+data/app-data.json
+node_modules/
+.env
+.DS_Store
+.superpowers/
