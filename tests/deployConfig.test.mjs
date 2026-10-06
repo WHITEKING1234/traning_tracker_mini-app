@@ -10,5 +10,6 @@ test("Render blueprint runs the Node web service with health checks and secret b
   assert.match(blueprint, /buildCommand:\s*npm test/);
   assert.match(blueprint, /startCommand:\s*npm start/);
   assert.match(blueprint, /healthCheckPath:\s*\/api\/health/);
+  assert.match(blueprint, /autoDeployTrigger:\s*commit/);
   assert.match(blueprint, /key:\s*BOT_TOKEN\s*\n\s*sync:\s*false/);
 });
