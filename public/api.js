@@ -1,4 +1,17 @@
-import { getTelegramInitData } from "./telegram.js";
+import { createLocalTrainingApi } from "./localTrainingApi.js";
+import { getTelegramInitData, getTelegramUser } from "./telegram.js";
+
+const localApi = createLocalTrainingApi({ getUser: getTelegramUser });
+
+function shouldUseLocalApi() {
+  const location = globalThis.location;
+  if (!location) return false;
+  return (
+    location.protocol === "file:" ||
+    location.hostname.endsWith("github.io") ||
+    location.search.includes("storage=local")
+  );
+}
 
 async function request(path, options = {}) {
   const response = await fetch(path, {
@@ -23,10 +36,12 @@ async function request(path, options = {}) {
 }
 
 export function apiGet(path) {
+  if (shouldUseLocalApi()) return localApi.get(path);
   return request(path);
 }
 
 export function apiSend(method, path, body) {
+  if (shouldUseLocalApi()) return localApi.send(method, path, body);
   return request(path, {
     method,
     body: JSON.stringify(body ?? {}),

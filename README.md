@@ -42,6 +42,23 @@ npm test
 
 Telegram launch data валидируется на backend. Никогда не добавляй `BOT_TOKEN` в frontend-код.
 
+## Free GitHub Pages Deploy
+
+Если нужен полностью бесплатный запуск без Render и сервера, используй GitHub Pages. В этом режиме приложение работает как static Telegram Mini App, а веса, подходы, вес тела и ссылки на технику сохраняются в `localStorage` на устройстве.
+
+1. Открой repo settings: `https://github.com/WHITEKING1234/traning_tracker_mini-app/settings/pages`.
+2. В `Build and deployment` выбери Source → `GitHub Actions`.
+3. Перейди во вкладку Actions и запусти workflow `Deploy GitHub Pages`, если он не стартовал сам.
+4. После deploy открой:
+
+```text
+https://WHITEKING1234.github.io/traning_tracker_mini-app/
+```
+
+5. Эту ссылку вставь в `@BotFather` как Mini App/Menu Button URL.
+
+Ограничение этого режима: данные живут только на устройстве. Если очистить данные Safari/Telegram WebView или открыть приложение с другого телефона, история не синхронизируется.
+
 ## Render Deploy
 
 В репозитории есть `render.yaml`, поэтому Render может поднять сервис как Blueprint.
